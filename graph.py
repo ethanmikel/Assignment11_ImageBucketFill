@@ -59,39 +59,70 @@ class Node:
         next: The reference to the next node in the linked list (None by default).
     """
 
-    def __init__(self, data, next=None):
+    def __init__(self, data, next_node=None):
         """
         Initializes a new node with the given data and a reference to the next node.
 
         Args:
             data: The data to store in the node.
-            next: Optional; the next node in the linked list (None by default).
+            next_node: Optional; the next node in the linked list (None by default).
         """
         self.data = data
-        self.next = next
-
+        self.next = next_node
 
 class StackError(Exception):
-    pass
-
+    """
+    Custom exception class for errors related to the Stack operations.
+    """
 
 class Stack:
+    """
+    A stack implementation using a singly linked list.
+    """
+
     def __init__(self):
+        """
+        Initializes an empty stack.
+        """
         self._top = None
         self._size = 0
 
     def peek(self):
+        """
+        Returns the item on the top of the stack without removing it.
+        
+        Raises:
+            StackError: If the stack is empty.
+        
+        Returns:
+            The data stored in the top node of the stack.
+        """
         if self.is_empty():
             raise StackError("Peek from empty stack.")
         return self._top.data
 
     def push(self, item):
+        """
+        Pushes a new item onto the stack.
+
+        Args:
+            item: The data to be added to the stack.
+        """
         new_node = Node(item)
         new_node.next = self._top
         self._top = new_node
         self._size += 1
 
     def pop(self):
+        """
+        Removes and returns the item on the top of the stack.
+        
+        Raises:
+            StackError: If the stack is empty.
+        
+        Returns:
+            The data stored in the removed node.
+        """
         if self.is_empty():
             raise StackError("Pop from empty stack.")
         removed_data = self._top.data
@@ -100,15 +131,27 @@ class Stack:
         return removed_data
 
     def is_empty(self):
+        """
+        Checks if the stack is empty.
+
+        Returns:
+            True if the stack is empty, False otherwise.
+        """
         return self._top is None
 
     def size(self):
+        """
+        Returns the number of items in the stack.
+
+        Returns:
+            The size of the stack as an integer.
+        """
         return self._size
 
-
 class QueueError(Exception):
-    pass
-
+    """
+    Custom exception class for errors related to queue operations.
+    """
 
 class Queue:
     """
